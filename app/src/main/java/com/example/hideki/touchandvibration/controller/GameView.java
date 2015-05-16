@@ -27,7 +27,7 @@ public class GameView extends SurfaceView implements Runnable {
 
 	private InputHandler inputHandler;
 
-	public GameView(Context context, int gameWidth, int gameHeight) {
+	public GameView(final Context context, int gameWidth, int gameHeight) {
 		super(context);
 		gameImage = Bitmap.createBitmap(gameWidth, gameHeight,
 				Bitmap.Config.RGB_565);
@@ -43,7 +43,7 @@ public class GameView extends SurfaceView implements Runnable {
 			public void surfaceCreated(SurfaceHolder holder) {
 				initInput();
 				if (currentState == null) {
-					setCurrentState(new LoadState());
+					setCurrentState(new LoadState(context));
 				}
 				initGame();
 			}

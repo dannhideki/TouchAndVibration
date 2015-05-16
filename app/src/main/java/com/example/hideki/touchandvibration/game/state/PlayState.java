@@ -1,8 +1,10 @@
 package com.example.hideki.touchandvibration.game.state;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Vibrator;
 import android.view.MotionEvent;
 
 import com.example.hideki.touchandvibration.controller.Assets;
@@ -39,6 +41,13 @@ public class PlayState extends State {
 
 	// Declare new UIButton
 	private UIButton pauseButton;
+
+    private Context context;
+
+    public PlayState(Context context){
+        this.context = context;
+    }
+
 
 	@Override
 	public void init() {
@@ -92,13 +101,21 @@ public class PlayState extends State {
 				if (player.isDucked()
 						&& Rect.intersects(b.getRect(), player.getDuckRect())) {
 					b.onCollide(player);
+                    setVibrator();
 				} else if (!player.isDucked()
 						&& Rect.intersects(b.getRect(), player.getRect())) {
 					b.onCollide(player);
+                    setVibrator();
 				}
+
 			}
 		}
 	}
+
+    private void setVibrator(){
+        // vibration for 300 milliseconds
+        ((Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(300);
+    }
 
 	@Override
 	public void render(Painter g) {

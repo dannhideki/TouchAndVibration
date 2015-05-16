@@ -1,5 +1,6 @@
 package com.example.hideki.touchandvibration.game.state;
 
+import android.content.Context;
 import android.view.MotionEvent;
 
 import com.example.hideki.touchandvibration.controller.Assets;
@@ -9,6 +10,12 @@ import com.example.hideki.touchandvibration.framework.util.UIButton;
 
 public class MenuState extends State {
 	private UIButton playButton, scoreButton;
+
+    private Context context;
+
+    public MenuState(Context context){
+        this.context = context;
+    }
 
 	@Override
 	public void init() {
@@ -38,10 +45,10 @@ public class MenuState extends State {
 		if (e.getAction() == MotionEvent.ACTION_UP) {
 			if (playButton.isPressed(scaledX, scaledY)) {
 				playButton.cancel();
-				setCurrentState(new PlayState());
+				setCurrentState(new PlayState(context));
 			} else if (scoreButton.isPressed(scaledX, scaledY)) {
 				scoreButton.cancel();
-				setCurrentState(new ScoreState());
+				setCurrentState(new ScoreState(context));
 			} else {
 				playButton.cancel();
 				scoreButton.cancel();

@@ -1,5 +1,6 @@
 package com.example.hideki.touchandvibration.game.state;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
@@ -10,6 +11,12 @@ import com.example.hideki.touchandvibration.framework.util.Painter;
 
 public class ScoreState extends State {
 	private String highScore;
+
+    private Context context;
+
+    public ScoreState(Context context){
+        this.context = context;
+    }
 
 	@Override
 	public void init() {
@@ -37,7 +44,7 @@ public class ScoreState extends State {
 	@Override
 	public boolean onTouch(MotionEvent e, int scaledX, int scaledY) {
 		if (e.getAction() == MotionEvent.ACTION_UP) {
-			setCurrentState(new MenuState());
+			setCurrentState(new MenuState(context));
 		}
 		return true;
 	}

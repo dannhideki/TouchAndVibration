@@ -1,5 +1,6 @@
 package com.example.hideki.touchandvibration.game.state;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
@@ -12,6 +13,11 @@ public class GameOverState extends State {
 
 	private String playerScore;
 	private String gameOverMessage = "GAME OVER";
+    private Context context;
+
+    public GameOverState(Context context){
+        this.context = context;
+    }
 
 	public GameOverState(int playerScore) {
 		this.playerScore = playerScore + ""; // Convert int to String
@@ -48,7 +54,7 @@ public class GameOverState extends State {
 	@Override
 	public boolean onTouch(MotionEvent e, int scaledX, int scaledY) {
 		if (e.getAction() == MotionEvent.ACTION_UP) {
-			setCurrentState(new MenuState());
+			setCurrentState(new MenuState(context));
 		}
 		return true;
 	}
